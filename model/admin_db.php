@@ -21,6 +21,9 @@ function is_valid_admin_login($email, $password) {
     $statement->execute();
     $row = $statement->fetch();
     $statement->closeCursor();
+    if ($row === false) {
+        return false;
+    }
     $hash = $row['password'];
     return password_verify($password, $hash);
 }
